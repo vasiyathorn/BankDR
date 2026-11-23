@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SmartBank</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/ethers@6.13.4/dist/ethers.umd.min.js"></script>
+</head>
+
+<body>
+    <!-- ===== Header ===== -->
+    <header class="topbar">
+        <div class="logo">Smart<span>Bank</span></div>
+        <div class="top-right">
+            <span id="connStatus" class="conn">Not connected</span>
+            <button id="connectBtn" class="btn-primary">Connect Wallet</button>
+        </div>
+    </header>
+
+    <div class="layout">
+        <!-- ===== Sidebar ===== -->
+        <aside class="sidebar">
+            <p class="menu-title">MAIN MENU</p>
+            <a href="#dashboard" class="menu-item active">Dashboard</a>
+            <a href="#deposit" class="menu-item">Deposit</a>
+            <a href="#withdraw" class="menu-item">Withdraw</a>
+            <a href="#history" class="menu-item">Transaction History</a>
+        </aside>
+
+        <!-- ===== Main ===== -->
+        <main class="content">
+            <p class="subtitle" id="dashboard">Simple Bank &amp; Smart Deposit Platform</p>
+
+            <!-- Wallet card -->
+            <section class="wallet-card">
+                <h3>Connected Wallet</h3>
+                <p id="account">--</p>
+                <p>Balance: <span id="walletBalance">0.0000</span> ETH</p>
+                <p>Contract: <span id="contractShort">--</span></p>
+            </section>
+
+            <!-- Stats -->
+            <section class="stats">
+                <div class="stat">
+                    <span>My Bank Balance</span>
+                    <b><span id="bankBalance">0</span> ETH</b>
+                </div>
+                <div class="stat">
+                    <span>Total in Bank</span>
+                    <b><span id="totalBank">0</span> ETH</b>
+                </div>
+                <div class="stat">
+                    <span>Network</span>
+                    <b id="network">--</b>
+                </div>
+            </section>
+
+            <p id="status" class="status"></p>
+
+            <!-- Deposit -->
+            <section class="card" id="deposit">
+                <h2>+ Deposit</h2>
+                <div class="hint">ฝาก ETH เข้า Bank Smart Contract (ต้องมากกว่า 0)</div>
+                <label for="depositAmount">Amount (ETH)</label>
+                <input id="depositAmount" type="number" step="0.0001" min="0" placeholder="เช่น 0.001" />
+                <button id="depositBtn" class="btn-primary">Deposit</button>
+            </section>
+
+            <!-- Withdraw -->
+            <section class="card" id="withdraw">
+                <h2>− Withdraw</h2>
+                <div class="hint">ถอน ETH ออกจาก Bank กลับเข้า Wallet ของคุณ</div>
+                <label for="withdrawAmount">Amount (ETH)</label>
+                <input id="withdrawAmount" type="number" step="0.0001" min="0" placeholder="เช่น 0.001" />
+                <div class="row">
+                    <button id="withdrawBtn" class="btn-primary">Withdraw</button>
+                    <button id="maxBtn" class="btn-outline">ถอนทั้งหมด</button>
+                </div>
+            </section>
+
+            <!-- History -->
+            <section class="card" id="history">
+                <div class="card-head">
+                    <h2>Transaction History</h2>
+                    <button id="refreshBtn" class="btn-outline">Refresh</button>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Action</th>
+                            <th>Amount (ETH)</th>
+                            <th>Block</th>
+                            <th>Tx</th>
+                        </tr>
+                    </thead>
+                    <tbody id="historyBody">
+                        <tr>
+                            <td colspan="4" class="empty">No transactions yet</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
